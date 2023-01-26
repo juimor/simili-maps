@@ -8,6 +8,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GoogleMapsComponent } from './components/google-maps/google-maps.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
     MapComponent,
     SearchBarComponent,
     SideMenuComponent,
+    GoogleMapsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,5 +4,15 @@
   placeholder="Rechercher..."
   type="text"
 />
+<button
+  #addToFavoritesBtn
+  class="addToBtn favorites"
+  (click)="saveAddress('favorites')"
+>
+  Add to favorites
+</button>
+<button #addToTestBtn class="addToBtn test" (click)="saveAddress('tests')">
+  Add to tests
+</button>
 <google-map height="100%" width="100%" [center]="center" [zoom]="zoom">
 </google-map>

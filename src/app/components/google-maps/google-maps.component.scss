@@ -1,5 +1,4 @@
 .map-search-field {
-    flex-grow: 5;
     padding-left: 12px;
     border: 0;
     margin-left: 10px;
@@ -11,6 +10,23 @@
     border-radius: 3px;
 }
 
+.addToBtn {
+    margin-left: 10px;
+    background-color: white;
+    height: 36px;
+    width: 100px;
+    outline: none;
+    border: solid 1px lightgray;
+    border-radius: 3px;
+}
 .map-search-field:focus {
     border: solid 1px lightblue;
 }
+
+.test{
+    background-color: rgb(240, 219, 199);
+} 
+
+.favorites{
+    background-color: rgb(202, 224, 204);
+} 

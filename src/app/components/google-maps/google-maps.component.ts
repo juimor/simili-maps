@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
-import { bounds } from 'leaflet';
+import { PlaceSearchResult } from 'src/app/models/PlaceSearchResult';
 
 @Component({
   selector: 'app-google-maps',
@@ -9,6 +9,8 @@ import { bounds } from 'leaflet';
 })
 export class GoogleMapsComponent implements AfterViewInit {
   @ViewChild('mapSearchField') mapSearchField!: ElementRef;
+  @ViewChild('addToFavoritesBtn') addToFavoritesBtn!: ElementRef;
+  @ViewChild('addToTestBtn') addToTestBtn!: ElementRef;
   @ViewChild(GoogleMap) map!: GoogleMap;
 
   display: any;
@@ -17,18 +19,27 @@ export class GoogleMapsComponent implements AfterViewInit {
       lat: 48.856614,
       lng:  2.3522219
   };
+  placeTmp: any;
+  displayAddBtn: boolean = false;
 
   constructor() {}
   ngAfterViewInit(): void {
     this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(this.mapSearchField.nativeElement);
+    this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(this.addToFavoritesBtn.nativeElement);
+    this.map.controls[google.maps.ControlPosition.LEFT_TOP].push(this.addToTestBtn.nativeElement);
     const searchBox = new google.maps.places.SearchBox(this.mapSearchField.nativeElement);
     
     searchBox.addListener('places_changed', () => {
+      this.displayAddBtn = true;
       const places = searchBox.getPlaces();
       if (places!.length === 0) return;
-      
       const bounds = new google.maps.LatLngBounds();
+
       places!.forEach(place => {
+        console.log(place)
+        this.placeTmp.addressName = place.formatted_address;
+        this.placeTmp.location = place.geometry?.location;
+        console.log(this.placeTmp)
         if (!place.geometry || !place.geometry.location) return;
         if (place.geometry.viewport) {
           bounds.union(place.geometry.viewport);
@@ -37,10 +48,15 @@ export class GoogleMapsComponent implements AfterViewInit {
         }
       });
       this.map.fitBounds(bounds)
-      console.log(places)
-      console.log(bounds)
     })
   }
 
+  saveAddress(category: string) {
+    if (category === 'favorites'){
+      console.log(this.placeTmp)
+    } else {
+
+    }
+  }
 
 }
